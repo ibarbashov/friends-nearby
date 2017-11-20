@@ -22,7 +22,7 @@ public class GreetingControllerTest {
 
     @Test
     public void shouldGreetWithHelloWorld() {
-        assertThat(restTemplate.getForObject("http://localhost/" +
+        assertThat(restTemplate.getForObject("http://localhost:" +
                 port + "/hello", String.class)).isEqualTo("Hello world!");
     }
 }
