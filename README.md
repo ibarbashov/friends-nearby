@@ -15,6 +15,6 @@ docker logs -f iodudes-postgres
 
 4. Run application:
 ```
-./gradlew :backend :bootRun
+./gradlew :backend:bootRun
 ```
 
