@@ -16,6 +16,9 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
 
+    compile("org.springframework.data:spring-data-jpa")
+    compile("org.springframework.security:spring-security-web")
+
     compile("org.hibernate:hibernate-core:5.1.0.Final")
     compile("org.hibernate:hibernate-entitymanager:5.1.0.Final")
     compile("org.hibernate:hibernate-validator:5.2.4.Final")

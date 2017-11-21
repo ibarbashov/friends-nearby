@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Collections;
 import java.util.Set;
 
@@ -20,7 +21,6 @@ import static io.dudes.friendsnearby.entity.UserRole.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity implements UserDetails {
-
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)
@@ -28,6 +28,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String name;
 
+    @Transient
     private Set<UserRole> roles = Collections.singleton(REGULAR_USER);
 
     public User(String username, String password, String name) {

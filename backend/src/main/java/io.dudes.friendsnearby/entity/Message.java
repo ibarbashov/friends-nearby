@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,8 +14,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Message extends BaseEntity {
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User author;
+    @ManyToOne
     @JoinColumn(name = "chat_id")
     private Chat chat;
     @Column(nullable = false)
