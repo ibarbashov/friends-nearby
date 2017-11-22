@@ -1,0 +1,24 @@
+apply plugin: "java"
+apply plugin: "checkstyle"
+
+sourceCompatibility = 1.8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+checkstyleMain {
+    ignoreFailures = true
+    config resources.text.fromFile(new File(rootDir, "gradle/checkstyle/checkstyle.xml"))
+    reports {
+        xml.enabled = false
+    }
+}
+
+checkstyleTest {
+    ignoreFailures = true
+    showViolations = false
+    config resources.text.fromFile(new File(rootDir, "gradle/checkstyle/checkstyle.xml"))
+    exclude '**/**'
+    reports {
+        xml.enabled = false
+    }
+
+}
