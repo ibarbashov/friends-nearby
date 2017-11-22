@@ -7,3 +7,4 @@
 
 # Build output
 **/build/
+.git_version_tag
