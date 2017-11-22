@@ -2,7 +2,6 @@ package io.dudes.friendsnearby.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,7 +11,7 @@ import javax.persistence.Transient;
 import java.util.Collections;
 import java.util.Set;
 
-import static io.dudes.friendsnearby.entity.UserRole.*;
+import static io.dudes.friendsnearby.entity.UserRole.REGULAR_USER;
 
 
 @Entity
