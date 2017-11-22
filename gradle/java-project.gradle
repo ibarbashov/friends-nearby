@@ -1,7 +1,7 @@
 apply plugin: "java"
 apply plugin: "checkstyle"
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 checkstyleMain {
@@ -20,5 +20,4 @@ checkstyleTest {
     reports {
         xml.enabled = false
     }
-
 }
