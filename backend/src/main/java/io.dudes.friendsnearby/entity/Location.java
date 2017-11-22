@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Location extends BaseEntity {
     @Column(nullable = false)
     private Double longitude;

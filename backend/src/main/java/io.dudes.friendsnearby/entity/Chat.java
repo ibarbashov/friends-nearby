@@ -13,7 +13,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Chat extends BaseEntity {
     @Column(nullable = false)
     private String name;

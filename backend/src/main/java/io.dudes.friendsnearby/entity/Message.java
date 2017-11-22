@@ -12,13 +12,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class Message extends BaseEntity {
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User author;
     @ManyToOne
-    @JoinColumn(name = "chat_id")
+    @JoinColumn(name = "chat_id", nullable = false)
     private Chat chat;
     @Column(nullable = false)
     private LocalDateTime timestamp;

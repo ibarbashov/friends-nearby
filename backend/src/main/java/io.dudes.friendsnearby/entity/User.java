@@ -19,7 +19,6 @@ import static io.dudes.friendsnearby.entity.UserRole.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
