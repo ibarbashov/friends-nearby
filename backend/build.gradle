@@ -1,3 +1,8 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+import static java.nio.file.StandardOpenOption.CREATE
+
 buildscript {
     ext {
         springBootVersion = "1.5.6.RELEASE"
@@ -31,4 +36,11 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
+task getVersionTag(type: Exec) {
+    commandLine "git", "describe"
+    def outputPath = Paths.get("$rootProject.rootDir/.git_version_tag")
+    standardOutput = Files.newOutputStream(outputPath, CREATE)
+}
+
 compileJava.dependsOn(processResources)
+compileJava.dependsOn(getVersionTag)
