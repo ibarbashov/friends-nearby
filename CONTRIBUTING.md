@@ -4,4 +4,4 @@
 - Commit message should include Issue # followed by dash and short explanation in Present Simple (e. g. ```#8 - Disable SpringBoot banner```)
 - After feature is completed feel free to open pull request (PR) into ```master``` and ask someone for a review.
 - NEVER PUSH TO ```master``` unless it's a minor README/docs change.
-- DO NOT EVER merge your own PR! 
+- DO NOT EVER merge your own PR! PRs require at least one approval after all.
