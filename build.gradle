@@ -1,9 +1,9 @@
 group "io.dudes"
 version "0.0.1-SNAPSHOT"
 
-subprojects {
-    apply from: "$rootDir/gradle/java-project.gradle"
-}
+//subprojects {
+//    apply from: "$rootDir/gradle/java-project.gradle"
+//}
 
 repositories {
     mavenCentral()

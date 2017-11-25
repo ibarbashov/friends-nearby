@@ -1,8 +1,4 @@
-apply plugin: "java"
 apply plugin: "checkstyle"
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 checkstyleMain {
     ignoreFailures = true

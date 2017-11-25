@@ -2,6 +2,10 @@
 .idea/
 *.iml
 
+# Android prject-specific
+local.properties
+**/libs/
+
 # Gradle meta
 .gradle/
 

@@ -1,3 +1,4 @@
 rootProject.name = 'friends-nearby'
 include 'backend'
+include 'friendly:app'
 
