@@ -38,7 +38,7 @@ dependencies {
 
 task getVersionTag(type: Exec) {
     commandLine "git", "describe"
-    def outputPath = Paths.get("$rootProject.rootDir/.git_version_tag")
+    def outputPath = Paths.get("$projectDir/src/main/resources/.git_version_tag")
     standardOutput = Files.newOutputStream(outputPath, CREATE)
 }
 

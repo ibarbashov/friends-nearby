@@ -7,4 +7,4 @@
 
 # Build output
 **/build/
-.git_version_tag
+**/.git_version_tag
