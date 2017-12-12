@@ -1,5 +1,6 @@
 package com.denshiksmle.friendly.model.utils;
 
+import com.denshiksmle.friendly.model.entities.Location;
 import com.denshiksmle.friendly.model.entities.User;
 
 /**
@@ -9,4 +10,5 @@ import com.denshiksmle.friendly.model.entities.User;
 public interface HttpUtils {
 
     User getUserFromServerByUserEmail(String email);
+    Location getLastLocationOfUser(String userId);
 }

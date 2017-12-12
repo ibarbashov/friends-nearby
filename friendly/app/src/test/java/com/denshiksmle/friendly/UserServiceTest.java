@@ -6,9 +6,6 @@ import com.denshiksmle.friendly.model.services.UserService;
 import com.denshiksmle.friendly.model.utils.HttpUtils;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.internal.runners.JUnit44RunnerImpl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
