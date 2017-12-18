@@ -22,8 +22,8 @@ public class LocationService {
         if (location != null) {
             final String strLatitude = String.valueOf(location.getLatitude()).substring(0, 5);
             final String strLongitude = String.valueOf(location.getLongitude()).substring(0, 5);
-            final String[] latitudeValues = strLatitude.split(".");
-            final String[] longitudesValues = strLongitude.split(".");
+            final String[] latitudeValues = strLatitude.split("\\.");
+            final String[] longitudesValues = strLongitude.split("\\.");
             return String.format(LOCATION_FORMAT, latitudeValues[0], latitudeValues[1],
                     longitudesValues[0], longitudesValues[1]);
         }
