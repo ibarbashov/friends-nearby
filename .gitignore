@@ -2,9 +2,14 @@
 .idea/
 *.iml
 
+# Android prject-specific
+local.properties
+**/libs/
+
 # Gradle meta
 .gradle/
 
 # Build output
 **/build/
+
 **/.git_version_tag
