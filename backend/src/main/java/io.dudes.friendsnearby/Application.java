@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class Application {
     @GetMapping("/version")
     @SneakyThrows
     public String version() {
-        List<String> strings = Files.readAllLines(Paths.get("../.git_version_tag"));
+        List<String> strings = Files.readAllLines(Paths.get("src/main/resources/.git_version_tag"));
         return strings.get(0);
     }
 }
