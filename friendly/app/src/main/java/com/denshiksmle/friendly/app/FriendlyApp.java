@@ -4,9 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.denshiksmle.friendly.di.components.DaggerFriendlyAppComponent;
 import com.denshiksmle.friendly.di.components.FriendlyAppComponent;
+import com.denshiksmle.friendly.di.components.NetComponent;
 import com.denshiksmle.friendly.di.modules.FriendlyAppModule;
+import com.denshiksmle.friendly.di.modules.NetModule;
 
 /**
  * Created by denglob on 11/22/17.
@@ -14,7 +15,7 @@ import com.denshiksmle.friendly.di.modules.FriendlyAppModule;
 
 public class FriendlyApp extends Application {
 
-    private FriendlyAppComponent friendlyAppComponent;
+    private NetComponent mNetComponent;
 
     @Override
     public void onCreate() {
@@ -26,14 +27,15 @@ public class FriendlyApp extends Application {
         return (FriendlyApp) context.getApplicationContext();
     }
 
-    public FriendlyAppComponent getFriendlyAppComponent() {
-        return friendlyAppComponent;
+    public NetComponent getmNetComponent() {
+        return mNetComponent;
     }
 
     public void buildGraphAndInject() {
-        friendlyAppComponent = DaggerFriendlyAppComponent.builder()
-                .friendlyAppModule(new FriendlyAppModule(this))
+
+        mNetComponent = DaggerNetComponent.builder()
+                .appModule(new FriendlyAppModule(this))
+                .netModule(new NetModule("http://iodudes.com/"))
                 .build();
-        friendlyAppComponent.inject(this);
     }
 }
