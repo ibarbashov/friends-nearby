@@ -7,4 +7,9 @@
     <string name="register_text">Ще не зареєсторваний? Реєструйся!</string>
     <string name="email_hint">Електронна пошта</string>
     <string name="password_hint">Пароль</string>
+    <string name="wrong_email">Невірний email!</string>
+    <string name="wrong_password">Невірний пароль!</string>
+    <string name="login_success_info">Аутентифікація успішна :)</string>
+    <string name="registration_success_info">Реєстрація успішна :)</string>
+    <string name="wrong_username_format">Невірний формат імені користувача!</string>
 </resources>

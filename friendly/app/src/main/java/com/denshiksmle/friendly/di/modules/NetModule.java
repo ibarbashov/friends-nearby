@@ -67,8 +67,8 @@ public class NetModule {
     Retrofit provideRetrofit(@NonNull final OkHttpClient okHttpClient, @NonNull final Gson gson) {
         final Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(mBaseUrl)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
         return retrofit;

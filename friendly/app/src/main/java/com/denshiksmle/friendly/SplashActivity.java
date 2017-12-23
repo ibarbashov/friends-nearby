@@ -12,13 +12,10 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
         int splashTimeOut = 2000;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
                 Intent launchMain = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(launchMain);
                 finish();
-            }
-        }, splashTimeOut);
+            }, splashTimeOut);
     }
 }

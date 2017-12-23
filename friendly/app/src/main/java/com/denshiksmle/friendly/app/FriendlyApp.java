@@ -1,6 +1,8 @@
 package com.denshiksmle.friendly.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.denshiksmle.friendly.di.components.DaggerNetComponent;
 import com.denshiksmle.friendly.di.components.NetComponent;
@@ -22,6 +24,12 @@ public class FriendlyApp extends Application {
                 .appModule(new AppModule(this))
                 .netModule(new NetModule("http://iodudes.com/"))
                 .build();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public NetComponent getNetComponent() {

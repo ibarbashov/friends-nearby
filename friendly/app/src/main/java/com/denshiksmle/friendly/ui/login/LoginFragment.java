@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.denshiksmle.friendly.R;
 import com.denshiksmle.friendly.app.FriendlyApp;
@@ -16,6 +17,7 @@ import com.denshiksmle.friendly.base.BaseFragment;
 import com.denshiksmle.friendly.di.components.DaggerLoginScreenComponent;
 import com.denshiksmle.friendly.di.modules.LoginScreenModule;
 import com.denshiksmle.friendly.model.entities.User;
+import com.denshiksmle.friendly.ui.navigation.MainActivityNavigation;
 
 import javax.inject.Inject;
 
@@ -24,6 +26,8 @@ import javax.inject.Inject;
  */
 
 public class LoginFragment extends BaseFragment implements LoginScreenContract.LoginView {
+
+    public static final String TAG = "LoginFragment";
 
     protected EditText loginField;
     protected EditText passwordField;
@@ -49,21 +53,33 @@ public class LoginFragment extends BaseFragment implements LoginScreenContract.L
                 .netComponent(((FriendlyApp) getActivity().getApplicationContext()).getNetComponent())
                 .loginScreenModule(new LoginScreenModule(this))
                 .build().inject(this);
+
+
+        login.setOnClickListener( l -> executeLogin());
+        registration.setOnClickListener( l -> ((MainActivityNavigation) navigation).toRegistrationScreen());
         return view;
+    }
+
+    //This must be in interactor
+    private void executeLogin() {
+        if (validateFields(loginField.getText().toString(), loginField, getString(R.string.wrong_email)) &&
+                validateFields(passwordField.getText().toString(), passwordField, getString(R.string.wrong_password))) {
+            loginScreenPresenter.loginUser(loginField.getText().toString(), passwordField.getText().toString());
+        }
     }
 
     @Override
     public void loginComplete() {
-
+        Toast.makeText(getContext(), getString(R.string.login_success_info), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginError(@NonNull String errorMessage) {
-
+        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginSuccess(@NonNull User user) {
-
+        ((MainActivityNavigation)navigation).toNavigationDrawerScreen();
     }
 }

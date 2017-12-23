@@ -12,4 +12,9 @@
     <string name="register_text">No account yet? Create one!</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
+    <string name="wrong_email">Wrong email!</string>
+    <string name="wrong_password">Wrong password!</string>
+    <string name="login_success_info">Login successful :)</string>
+    <string name="registration_success_info">Registration successful :)</string>
+    <string name="wrong_username_format">Wrong username format!</string>
 </resources>
