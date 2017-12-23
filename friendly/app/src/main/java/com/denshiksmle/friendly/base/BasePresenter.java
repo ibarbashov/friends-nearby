@@ -5,6 +5,4 @@ package com.denshiksmle.friendly.base;
  */
 
 public interface BasePresenter<T extends BaseView> {
-    void setView(T view);
-    void dropView();
 }

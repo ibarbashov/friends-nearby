@@ -3,8 +3,6 @@ package com.denshiksmle.friendly.di.modules;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.denshiksmle.friendly.app.FriendlyApp;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,17 +13,17 @@ import dagger.Provides;
  */
 
 @Module
-public class FriendlyAppModule {
+public class AppModule {
 
-    private final FriendlyApp friendlyApp;
+    private final Application app;
 
-    public FriendlyAppModule(@NonNull final FriendlyApp friendlyApp) {
-        this.friendlyApp = friendlyApp;
+    public AppModule(@NonNull final Application app) {
+        this.app = app;
     }
 
     @Provides
     @Singleton
     public Application provideApplication() {
-        return friendlyApp;
+        return app;
     }
 }

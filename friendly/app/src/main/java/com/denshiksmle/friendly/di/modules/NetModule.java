@@ -1,5 +1,6 @@
 package com.denshiksmle.friendly.di.modules;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -25,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetModule {
-    final String mBaseUrl;
+     String mBaseUrl;
 
     public NetModule(@NonNull final String mBaseUrl) {
         this.mBaseUrl = mBaseUrl;
@@ -33,21 +34,21 @@ public class NetModule {
 
     @Provides
     @Singleton
-    public SharedPreferences provideSharedPreferences(@NonNull final FriendlyApp friendlyApp) {
-        return PreferenceManager.getDefaultSharedPreferences(friendlyApp);
+    SharedPreferences provideSharedPreferences(@NonNull final Application application) {
+        return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     @Provides
     @Singleton
-    public Cache provideHttpCache(@NonNull final FriendlyApp friendlyApp) {
+    Cache provideHttpCache(@NonNull final Application application) {
         int cacheSize = 10 * 1024 * 1024;
-        final Cache cache = new Cache(friendlyApp.getCacheDir(), cacheSize);
+        final Cache cache = new Cache(application.getCacheDir(), cacheSize);
         return cache;
     }
 
     @Provides
     @Singleton
-    public Gson provideGson() {
+    Gson provideGson() {
         final GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         return gsonBuilder.create();
@@ -55,7 +56,7 @@ public class NetModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient(@NonNull final Cache cache) {
+    OkHttpClient provideOkHttpClient(@NonNull final Cache cache) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.cache(cache);
         return builder.build();
@@ -63,7 +64,7 @@ public class NetModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit(@NonNull final OkHttpClient okHttpClient, @NonNull final Gson gson) {
+    Retrofit provideRetrofit(@NonNull final OkHttpClient okHttpClient, @NonNull final Gson gson) {
         final Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

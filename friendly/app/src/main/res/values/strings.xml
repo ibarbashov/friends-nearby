@@ -1,11 +1,15 @@
 <resources>
-    <string name="app_name">friendly</string>
-    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="app_name" translatable="false">friendly</string>
+    <string name="title_activity_navigation_drawer" translatable="false">NavigationDrawerActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="action_about_us">About us</string>
     <string name="action_help">Help</string>
     <string name="action_log_out">Log out</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">No account yet? Create one!</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
 </resources>

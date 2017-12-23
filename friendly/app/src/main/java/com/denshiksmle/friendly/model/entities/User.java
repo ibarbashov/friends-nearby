@@ -1,26 +1,37 @@
 package com.denshiksmle.friendly.model.entities;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by troll on 11.12.2017.
  */
 
 public class User {
 
+    @SerializedName("uid")
+    @Expose
     private String uid;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private String userName;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("password")
+    @Expose
     private String password;
 
-    public User(String name, String userName, String password) {
+    public User(String name, String email, String password) {
         this.name = name;
-        this.userName = userName;
+        this.email = email;
         this.password = password;
     }
 
-    public User(String uid, String name, String userName, String password) {
+    public User(String uid, String name, String email, String password) {
         this.uid = uid;
         this.name = name;
-        this.userName = userName;
+        this.email = email;
         this.password = password;
     }
 
@@ -28,8 +39,8 @@ public class User {
         return name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
