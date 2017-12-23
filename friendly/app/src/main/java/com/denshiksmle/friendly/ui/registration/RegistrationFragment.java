@@ -51,9 +51,9 @@ public class RegistrationFragment extends BaseFragment implements RegistrationSc
                 .registrationScreenModule(new RegistrationScreenModule(this))
                 .build().inject(this);
 
-        mRegister.setOnClickListener( l -> executeLogin());
+        mRegister.setOnClickListener( l -> { showProgressDialog(getString(R.string.please_wait)); executeLogin(); });
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     private void executeLogin() {
@@ -72,11 +72,13 @@ public class RegistrationFragment extends BaseFragment implements RegistrationSc
 
     @Override
     public void registrationError(@NonNull String errorMessage) {
+        hideProgressDialog();
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void registrationSuccess(@NonNull User user) {
+        hideProgressDialog();
         ((MainActivityNavigation) navigation).toNavigationDrawerScreen();
     }
 }

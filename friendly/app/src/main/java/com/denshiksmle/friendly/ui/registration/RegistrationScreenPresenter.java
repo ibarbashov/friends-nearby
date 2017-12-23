@@ -3,6 +3,7 @@ package com.denshiksmle.friendly.ui.registration;
 import android.support.annotation.NonNull;
 
 import com.denshiksmle.friendly.model.entities.User;
+import com.denshiksmle.friendly.util.ExponentialBackoff;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,11 +38,9 @@ public class RegistrationScreenPresenter implements RegistrationScreenContract.R
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .retryWhen(errors -> errors.zipWith(Observable.range(1, 4), (n, i) -> i)
-                        .flatMap(retryCount -> Observable.timer((long) Math.pow(3, retryCount), TimeUnit.SECONDS)))
+                .retryWhen(ExponentialBackoff.exponentialBackoffForExceptions(3, 2, TimeUnit.SECONDS, Exception.class))
                 .subscribe(user -> mRegistrationView.registrationSuccess(user),
-                        error -> mRegistrationView.registrationError(error.getMessage()),
-                        () -> mRegistrationView.registrationComplete());
+                        error -> mRegistrationView.registrationError(error.getMessage()));
     }
 
     private interface UserService {

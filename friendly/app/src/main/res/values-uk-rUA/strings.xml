@@ -12,4 +12,5 @@
     <string name="login_success_info">Аутентифікація успішна :)</string>
     <string name="registration_success_info">Реєстрація успішна :)</string>
     <string name="wrong_username_format">Невірний формат імені користувача!</string>
+    <string name="please_wait">Зачекайте, будь ласка ...</string>
 </resources>

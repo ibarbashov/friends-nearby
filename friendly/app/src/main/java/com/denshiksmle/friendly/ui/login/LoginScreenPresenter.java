@@ -1,15 +1,19 @@
 package com.denshiksmle.friendly.ui.login;
 
+import android.accounts.NetworkErrorException;
 import android.support.annotation.NonNull;
 
 import com.denshiksmle.friendly.model.entities.User;
+import com.denshiksmle.friendly.util.ExponentialBackoff;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
@@ -37,13 +41,11 @@ public class LoginScreenPresenter implements LoginScreenContract.LoginPresenter 
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
                 .retryWhen(
-                        errors ->
-                                errors.zipWith(Observable.range(1, 4), (n, i) -> i)
-                                        .flatMap(retryCount -> Observable.timer((long) Math.pow(3, retryCount), TimeUnit.SECONDS)))
+                        ExponentialBackoff.exponentialBackoffForExceptions(3, 2, TimeUnit.SECONDS, Exception.class))
                 .subscribe(
-                        user -> mView.loginSuccess(user),
-                        error -> mView.loginError(error.getMessage()),
-                        () -> mView.loginComplete());
+                        user -> mView.loginSuccess(user) ,
+                        error -> mView.loginError(error.getMessage())
+                );
     }
 
     private interface UserService {

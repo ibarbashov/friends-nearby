@@ -54,8 +54,10 @@ public class LoginFragment extends BaseFragment implements LoginScreenContract.L
                 .loginScreenModule(new LoginScreenModule(this))
                 .build().inject(this);
 
-
-        login.setOnClickListener( l -> executeLogin());
+        login.setOnClickListener( l -> {
+            showProgressDialog(getString(R.string.please_wait));
+            executeLogin();
+        });
         registration.setOnClickListener( l -> ((MainActivityNavigation) navigation).toRegistrationScreen());
         return view;
     }
@@ -70,16 +72,19 @@ public class LoginFragment extends BaseFragment implements LoginScreenContract.L
 
     @Override
     public void loginComplete() {
+        hideProgressDialog();
         Toast.makeText(getContext(), getString(R.string.login_success_info), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginError(@NonNull String errorMessage) {
+        hideProgressDialog();
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginSuccess(@NonNull User user) {
+        hideProgressDialog();
         ((MainActivityNavigation)navigation).toNavigationDrawerScreen();
     }
 }

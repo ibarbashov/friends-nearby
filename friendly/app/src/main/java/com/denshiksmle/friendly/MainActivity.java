@@ -1,6 +1,7 @@
 package com.denshiksmle.friendly;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.denshiksmle.friendly.base.BaseActivity;
@@ -28,12 +29,23 @@ public class MainActivity extends BaseActivity implements MainActivityNavigation
     }
 
     @Override
+    public void onBackPressed() {
+        final Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (currentFragment instanceof LoginFragment) {
+            this.finish();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void toRegistrationScreen() {
         final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         final RegistrationFragment registrationFragment = new RegistrationFragment();
         registrationFragment.setNavigation(this);
         fragmentTransaction.replace(R.id.fragment_container, registrationFragment, RegistrationFragment.TAG);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(LoginFragment.TAG);
         fragmentTransaction.commit();
     }
 
