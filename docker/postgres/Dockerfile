@@ -1,5 +1,5 @@
 FROM postgres:9.6
-
 ENV PGDATA /var/lib/psql/data
 ENV POSTGRES_USER iodudes
 ENV POSTGRES_PASSWORD S33fWqwe
+EXPOSE 5432 8080

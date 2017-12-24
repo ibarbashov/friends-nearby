@@ -1,4 +1,4 @@
-package io.dudes.friendsnearby.service;
+package io.dudes.friendsnearby.exception;
 
 public class UserNotFoundException extends RuntimeException {
 
