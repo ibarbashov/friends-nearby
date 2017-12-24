@@ -1,5 +1,6 @@
 package com.denshiksmle.friendly;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -36,6 +37,14 @@ public class NavigationDrawerActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        final Intent intent = getIntent();
+        if (intent != null) {
+            final User user = intent.getParcelableExtra(USER_INTENT_KEY);
+            if (user != null) {
+                updateUserInfo(user, navigationView);
+            }
+        }
     }
 
     @Override
@@ -102,8 +111,8 @@ public class NavigationDrawerActivity extends BaseActivity
     private void updateUserInfo(@NonNull final User user,
                                 @NonNull final NavigationView navigationView) {
         final View navHeader = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
-        final TextView userName = navigationView.findViewById(R.id.navDrawerUserName);
-        final TextView email = navigationView.findViewById(R.id.navDrawerEmail);
+        final TextView userName = navHeader.findViewById(R.id.navDrawerUserName);
+        final TextView email = navHeader.findViewById(R.id.navDrawerEmail);
 
         userName.setText(user.getUserName());
         email.setText(user.getName());

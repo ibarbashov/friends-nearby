@@ -85,6 +85,6 @@ public class LoginFragment extends BaseFragment implements LoginScreenContract.L
     @Override
     public void loginSuccess(@NonNull User user) {
         hideProgressDialog();
-        ((MainActivityNavigation)navigation).toNavigationDrawerScreen();
+        ((MainActivityNavigation)navigation).toNavigationDrawerScreen(user);
     }
 }
