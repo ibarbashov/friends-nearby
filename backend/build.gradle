@@ -47,5 +47,26 @@ task getVersionTag(type: Exec) {
     standardOutput = Files.newOutputStream(outputPath, CREATE)
 }
 
+task buildDockerImage(type: Exec) {
+    workingDir = rootProject.rootDir
+    commandLine "docker", "build", "-t", "iodudes/backend:1.0", "-f", "docker/app/Dockerfile", "."
+}
+
+task runDockerContainer(type: Exec) {
+    workingDir = rootProject.rootDir
+    commandLine "docker", "run", "--rm", "-d", "--name=backend", "--network", "container:postgres", "iodudes/backend:1.0"
+}
+
+task removeDockerContainer(type: Exec) {
+    workingDir = rootProject.rootDir
+    commandLine "docker", "rm", "-f", "backend"
+}
+
 compileJava.dependsOn(processResources)
 compileJava.dependsOn(getVersionTag)
+
+buildDockerImage.dependsOn(bootRepackage)
+
+runDockerContainer
+        .dependsOn(buildDockerImage)
+        .dependsOn(removeDockerContainer)

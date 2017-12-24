@@ -15,7 +15,12 @@ Running isolated build environment:
 docker build -t iodudes/build-env:1.0 docker/build-env
 ```
 ```
-docker run -d --name=build-env -v iodudes/build-env:1.0
+docker run -d --name=build-env -v /myvol -p 22:22 iodudes/build-env:1.0
+```
+then SSH into container and run build commands. You can redirect log and build output to local filesystem,
+e.g.: 
+```
+./graldew build > /myvol/build.log
 ```
 
 For **backend** module:

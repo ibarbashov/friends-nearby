@@ -1,5 +1,4 @@
 FROM thyrlian/android-sdk
-
-ENV LOGDIR "/var/log/friends-nearby"
 COPY . /app
+VOLUME /myvol
 WORKDIR /app
