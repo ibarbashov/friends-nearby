@@ -1,6 +1,7 @@
 package io.dudes.friendsnearby.service;
 
 import io.dudes.friendsnearby.entity.User;
+import io.dudes.friendsnearby.exception.UserNotFoundException;
 import io.dudes.friendsnearby.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

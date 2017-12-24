@@ -25,7 +25,7 @@ public class Application {
     @GetMapping("/version")
     @SneakyThrows
     public String version() {
-        List<String> strings = Files.readAllLines(Paths.get("src/main/resources/.git_version_tag"));
+        List<String> strings = Files.readAllLines(Paths.get("backend/src/main/resources/.git_version_tag"));
         return strings.get(0);
     }
 }
