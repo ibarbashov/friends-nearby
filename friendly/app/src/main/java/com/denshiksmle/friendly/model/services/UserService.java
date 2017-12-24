@@ -19,7 +19,7 @@ public class UserService {
     public String addATSignToUsername(String email){
         User user = httpUtils.getUserFromServerByUserEmail(email);
         if (user != null){
-            return "@"+user.getUserName();
+            return "@"+user.getName();
         }
         throw new NoSuchUserException();
     }

@@ -17,7 +17,7 @@ public class LocationService {
         this.httpUtils = httpUtils;
     }
 
-    public String formatLocationData(String userId) {
+    public String formatLocationData(int userId) {
         final Location location = httpUtils.getLastLocationOfUser(userId);
         if (location != null) {
             final String strLatitude = String.valueOf(location.getLatitude()).substring(0, 5);

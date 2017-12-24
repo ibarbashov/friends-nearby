@@ -1,13 +1,62 @@
 package com.denshiksmle.friendly;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+import com.denshiksmle.friendly.base.BaseActivity;
+import com.denshiksmle.friendly.model.entities.User;
+import com.denshiksmle.friendly.ui.login.LoginFragment;
+import com.denshiksmle.friendly.ui.navigation.MainActivityNavigation;
+import com.denshiksmle.friendly.ui.registration.RegistrationFragment;
+
+public class MainActivity extends BaseActivity implements MainActivityNavigation {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toLoginScreen();
+    }
+
+    @Override
+    public void toLoginScreen() {
+        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        final LoginFragment loginFragment = new LoginFragment();
+        loginFragment.setNavigation(this);
+        fragmentTransaction.replace(R.id.fragment_container, loginFragment, LoginFragment.TAG);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (currentFragment instanceof LoginFragment) {
+            this.finish();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void toRegistrationScreen() {
+        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        final RegistrationFragment registrationFragment = new RegistrationFragment();
+        registrationFragment.setNavigation(this);
+        fragmentTransaction.replace(R.id.fragment_container, registrationFragment, RegistrationFragment.TAG);
+        fragmentTransaction.addToBackStack(LoginFragment.TAG);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void toNavigationDrawerScreen(@NonNull final User user) {
+        final Intent launchNavigationMenu = new Intent(MainActivity.this, NavigationDrawerActivity.class);
+        launchNavigationMenu.putExtra(NavigationDrawerActivity.USER_INTENT_KEY, user);
+        startActivity(launchNavigationMenu);
+        finish();
     }
 }

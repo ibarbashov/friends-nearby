@@ -1,8 +1,8 @@
 package com.denshiksmle.friendly.base;
 
 /**
- * Created by denglob on 11/21/17.
+ * Created by denglob on 12/22/17.
  */
 
-public class BaseView {
+public interface BaseView<T> {
 }
