@@ -1,5 +1,6 @@
 package io.dudes.friendsnearby.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class User extends BaseEntity implements UserDetails {
     private String name;
 
     @Transient
+    @JsonIgnore
     private final Set<UserRole> roles = Collections.singleton(REGULAR_USER);
 
     public User(String username, String password, String name) {

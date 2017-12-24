@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userServiceImpl;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody User user) {
-        return new ResponseEntity<>(userServiceImpl.createUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 }

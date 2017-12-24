@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-public class DummyUserServiceTest {
+public class UserServiceTest {
 
     @Test
     public void shouldCapitalizeUsername() {
@@ -22,7 +22,7 @@ public class DummyUserServiceTest {
         when(userRepositoryMock.findUserById(42L))
                 .thenReturn(Optional.of(new User("jdoe", "passwd", "John Doe")));
 
-        UserService userService = new DummyUserService(userRepositoryMock);
+        UserService userService = new UserServiceImpl(userRepositoryMock);
 
         assertThat(userService.capitalizeUserName(42L))
                 .isEqualTo("JDOE");
@@ -34,7 +34,7 @@ public class DummyUserServiceTest {
         when(userRepositoryMock.findUserById(42L))
                 .thenReturn(Optional.empty());
 
-        UserService userService = new DummyUserService(userRepositoryMock);
+        UserService userService = new UserServiceImpl(userRepositoryMock);
         userService.capitalizeUserName(42L);
     }
 }

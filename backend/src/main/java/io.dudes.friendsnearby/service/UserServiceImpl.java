@@ -26,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String capitalizeUserName(Long userId) {
-        return null;
+        return userRepository.findUserById(userId)
+                .map(User::getUsername)
+                .map(String::toUpperCase)
+                .orElseThrow(UserNotFoundException::new);
     }
 }
