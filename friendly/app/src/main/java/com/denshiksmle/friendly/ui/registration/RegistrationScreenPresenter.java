@@ -13,6 +13,10 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -33,19 +37,20 @@ public class RegistrationScreenPresenter implements RegistrationScreenContract.R
     }
 
     @Override
-    public void registerUser(@NonNull String email, @NonNull String password, @NonNull String userName) {
-        retrofit.create(UserService.class).getUser(email, password)
+    public void registerUser(@NonNull String userName, @NonNull String password, @NonNull String name) {
+        final User requestUser = new User(userName, name, password);
+        retrofit.create(UserService.class).getUser(requestUser)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .retryWhen(ExponentialBackoff.exponentialBackoffForExceptions(3, 2, TimeUnit.SECONDS, Exception.class))
+                .retryWhen(ExponentialBackoff.exponentialBackoffForExceptions(2, 4, TimeUnit.SECONDS, Exception.class))
                 .subscribe(user -> mRegistrationView.registrationSuccess(user),
                         error -> mRegistrationView.registrationError(error.getMessage()));
     }
 
     private interface UserService {
-        @POST("/authentication/{email}/{password}")
-        Observable<User> getUser(@Path("email") String email,
-                                 @Path("password") String password);
+        @Headers({"Content-Type: application/json"})
+        @POST("/users")
+        Observable<User> getUser(@Body User user);
     }
 }

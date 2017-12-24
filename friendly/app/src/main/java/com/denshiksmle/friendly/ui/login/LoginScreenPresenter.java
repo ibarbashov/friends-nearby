@@ -41,7 +41,7 @@ public class LoginScreenPresenter implements LoginScreenContract.LoginPresenter 
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
                 .retryWhen(
-                        ExponentialBackoff.exponentialBackoffForExceptions(3, 2, TimeUnit.SECONDS, Exception.class))
+                        ExponentialBackoff.exponentialBackoffForExceptions(2, 4, TimeUnit.SECONDS, Exception.class))
                 .subscribe(
                         user -> mView.loginSuccess(user) ,
                         error -> mView.loginError(error.getMessage())

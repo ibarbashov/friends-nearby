@@ -51,12 +51,12 @@ public class RegistrationFragment extends BaseFragment implements RegistrationSc
                 .registrationScreenModule(new RegistrationScreenModule(this))
                 .build().inject(this);
 
-        mRegister.setOnClickListener( l -> { showProgressDialog(getString(R.string.please_wait)); executeLogin(); });
+        mRegister.setOnClickListener( l -> { showProgressDialog(getString(R.string.please_wait)); executeRegistration(); });
 
         return view;
     }
 
-    private void executeLogin() {
+    private void executeRegistration () {
         if (validateFields(mUsername.getText().toString(), mUsername, getString(R.string.wrong_username_format)) &&
                 validateFields(mEmail.getText().toString(), mEmail, getString(R.string.wrong_email)) &&
                 validateFields(mPassword.getText().toString(), mPassword, getString(R.string.wrong_password))) {
@@ -67,18 +67,24 @@ public class RegistrationFragment extends BaseFragment implements RegistrationSc
 
     @Override
     public void registrationComplete() {
-        Toast.makeText(getContext(), getString(R.string.registration_success_info), Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(), getString(R.string.registration_success_info), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void registrationError(@NonNull String errorMessage) {
         hideProgressDialog();
-        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(), getString(R.string.registration_fail), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void registrationSuccess(@NonNull User user) {
         hideProgressDialog();
-        ((MainActivityNavigation) navigation).toNavigationDrawerScreen();
+        if (user != null) {
+            Toast.makeText(getContext(), getString(R.string.registration_success_info), Toast.LENGTH_SHORT).show();
+            ((MainActivityNavigation) navigation).toNavigationDrawerScreen(user);
+        }
+        else {
+            Toast.makeText(getContext(), getString(R.string.registration_fail), Toast.LENGTH_SHORT).show();
+        }
     }
 }

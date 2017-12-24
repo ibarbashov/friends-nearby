@@ -1,6 +1,7 @@
 package com.denshiksmle.friendly;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,11 +9,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.denshiksmle.friendly.base.BaseActivity;
+import com.denshiksmle.friendly.model.entities.User;
 
 public class NavigationDrawerActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String USER_INTENT_KEY = "user_intent_key";
+    protected User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,5 +97,15 @@ public class NavigationDrawerActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void updateUserInfo(@NonNull final User user,
+                                @NonNull final NavigationView navigationView) {
+        final View navHeader = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
+        final TextView userName = navigationView.findViewById(R.id.navDrawerUserName);
+        final TextView email = navigationView.findViewById(R.id.navDrawerEmail);
+
+        userName.setText(user.getUserName());
+        email.setText(user.getName());
     }
 }

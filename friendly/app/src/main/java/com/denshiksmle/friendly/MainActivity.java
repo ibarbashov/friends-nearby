@@ -1,10 +1,13 @@
 package com.denshiksmle.friendly;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.denshiksmle.friendly.base.BaseActivity;
+import com.denshiksmle.friendly.model.entities.User;
 import com.denshiksmle.friendly.ui.login.LoginFragment;
 import com.denshiksmle.friendly.ui.navigation.MainActivityNavigation;
 import com.denshiksmle.friendly.ui.registration.RegistrationFragment;
@@ -50,7 +53,10 @@ public class MainActivity extends BaseActivity implements MainActivityNavigation
     }
 
     @Override
-    public void toNavigationDrawerScreen() {
-
+    public void toNavigationDrawerScreen(@NonNull final User user) {
+        final Intent launchNavigationMenu = new Intent(MainActivity.this, NavigationDrawerActivity.class);
+        launchNavigationMenu.putExtra(NavigationDrawerActivity.USER_INTENT_KEY, user);
+        startActivity(launchNavigationMenu);
+        finish();
     }
 }

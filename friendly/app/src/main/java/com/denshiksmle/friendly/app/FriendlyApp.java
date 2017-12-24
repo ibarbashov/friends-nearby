@@ -22,7 +22,7 @@ public class FriendlyApp extends Application {
         super.onCreate();
         mNetComponent = DaggerNetComponent.builder()
                 .appModule(new AppModule(this))
-                .netModule(new NetModule("http://iodudes.com/"))
+                .netModule(new NetModule("http://77.47.209.105:8080"))
                 .build();
     }
 
