@@ -1,20 +1,26 @@
 package com.denshiksmle.friendly;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-public class NavigationDrawerActivity extends AppCompatActivity
+import com.denshiksmle.friendly.base.BaseActivity;
+import com.denshiksmle.friendly.model.entities.User;
+
+public class NavigationDrawerActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String USER_INTENT_KEY = "user_intent_key";
+    protected User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        final Intent intent = getIntent();
+        if (intent != null) {
+            final User user = intent.getParcelableExtra(USER_INTENT_KEY);
+            if (user != null) {
+                updateUserInfo(user, navigationView);
+            }
+        }
     }
 
     @Override
@@ -92,5 +106,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void updateUserInfo(@NonNull final User user,
+                                @NonNull final NavigationView navigationView) {
+        final View navHeader = navigationView.inflateHeaderView(R.layout.nav_header_navigation_drawer);
+        final TextView userName = navHeader.findViewById(R.id.navDrawerUserName);
+        final TextView email = navHeader.findViewById(R.id.navDrawerEmail);
+
+        userName.setText(user.getUserName());
+        email.setText(user.getName());
     }
 }

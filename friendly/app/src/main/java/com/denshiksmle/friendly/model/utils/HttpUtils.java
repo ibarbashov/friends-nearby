@@ -10,5 +10,5 @@ import com.denshiksmle.friendly.model.entities.User;
 public interface HttpUtils {
 
     User getUserFromServerByUserEmail(String email);
-    Location getLastLocationOfUser(String userId);
+    Location getLastLocationOfUser(int userId);
 }
