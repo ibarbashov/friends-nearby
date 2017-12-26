@@ -23,8 +23,10 @@ public class Location extends BaseEntity {
     private Double latitude;
     @Column(nullable = false)
     private LocalDateTime timestamp;
+    @Column(nullable = false)
+    private Long userId;
 
-    public Location(Double longitude, Double latitude) {
+    public Location(Double longitude, Double latitude, Long userId) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.timestamp = LocalDateTime.now();
