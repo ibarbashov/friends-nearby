@@ -1,9 +1,11 @@
 package io.dudes.friendsnearby.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Wither;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
@@ -13,16 +15,19 @@ import javax.persistence.Transient;
 import java.util.Collections;
 import java.util.Set;
 
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 import static io.dudes.friendsnearby.entity.UserRole.REGULAR_USER;
 
 @Entity
 @Table(name = "users")
 @Data
+@Wither
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class User extends BaseEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
+    @JsonProperty(access = WRITE_ONLY)
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
