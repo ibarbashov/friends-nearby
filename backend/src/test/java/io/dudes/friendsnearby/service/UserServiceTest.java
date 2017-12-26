@@ -5,6 +5,7 @@ import io.dudes.friendsnearby.exception.UserNotFoundException;
 import io.dudes.friendsnearby.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -19,10 +20,12 @@ public class UserServiceTest {
     @Test
     public void shouldCapitalizeUsername() {
         UserRepository userRepositoryMock = mock(UserRepository.class);
+        PasswordEncoder passwordEncoderMock = mock(PasswordEncoder.class);
+
         when(userRepositoryMock.findUserById(42L))
                 .thenReturn(Optional.of(new User("jdoe", "passwd", "John Doe")));
 
-        UserService userService = new UserServiceImpl(userRepositoryMock);
+        UserService userService = new UserServiceImpl(userRepositoryMock, passwordEncoderMock);
 
         assertThat(userService.capitalizeUserName(42L))
                 .isEqualTo("JDOE");
@@ -31,10 +34,12 @@ public class UserServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void shouldThrowUserNotFoundException() {
         UserRepository userRepositoryMock = mock(UserRepository.class);
+        PasswordEncoder passwordEncoderMock = mock(PasswordEncoder.class);
+
         when(userRepositoryMock.findUserById(42L))
                 .thenReturn(Optional.empty());
 
-        UserService userService = new UserServiceImpl(userRepositoryMock);
+        UserService userService = new UserServiceImpl(userRepositoryMock, passwordEncoderMock);
         userService.capitalizeUserName(42L);
     }
 }
