@@ -9,7 +9,7 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 import static com.fasterxml.jackson.annotation.PropertyAccessor.*;
 
 @Configuration
-public class JacksonConfiguration {
+public class JacksonConfig {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper()

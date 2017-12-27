@@ -49,6 +49,7 @@ or
 ./gradlew :backend:runDockerContainer
 ```
 NOTE: application container uses other container's network stack so database container must be started before application.
+
 5. Run application on host machine:
 ```
 ./gradlew :backend:bootRun
